@@ -1,0 +1,2316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamandaré Burguer Delivery | Vila Alto Pinheiros - Almirante Tamandaré PR</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #040404;
+      --bg-surface: #0f0c0a;
+      --bg-card: rgba(20, 16, 14, 0.88);
+      --primary: #ff5400;
+      --primary-glow: rgba(255, 84, 0, 0.45);
+      --secondary: #ffb703;
+      --accent: #e63946;
+      --ifood-red: #ea1d2c;
+      --text: #f8f9fa;
+      --text-muted: #a39c96;
+      --border: rgba(255, 84, 0, 0.16);
+      --border-hover: rgba(255, 120, 20, 0.5);
+      --radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 84, 0, 0.35);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 84, 0, 0.7);
+    }
+
+    /* Embers Canvas */
+    #embers-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top Announcement Bar */
+    .top-bar {
+      background: linear-gradient(90deg, #ea1d2c 0%, #ff5400 100%);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      padding: 8px 16px;
+      position: relative;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .top-bar a {
+      color: #fff;
+      text-decoration: underline;
+      font-weight: 800;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 36px;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(4, 4, 4, 0.8);
+      border-bottom: 1px solid rgba(255, 84, 0, 0.12);
+      transition: var(--transition);
+    }
+
+    .navbar.scrolled {
+      top: 0;
+      padding: 12px 40px;
+      background: rgba(4, 4, 4, 0.95);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-img-logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 12px rgba(255, 84, 0, 0.45));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .brand-logo:hover .brand-img-logo {
+      transform: scale(1.1) rotate(5deg);
+      filter: drop-shadow(0 0 20px rgba(255, 120, 20, 0.8));
+    }
+
+    @keyframes floatLogo {
+      0% { transform: translateY(0); filter: drop-shadow(0 0 14px rgba(255, 84, 0, 0.5)); }
+      100% { transform: translateY(-6px); filter: drop-shadow(0 0 24px rgba(255, 140, 20, 0.85)); }
+    }
+
+    .flame-icon {
+      font-size: 26px;
+      filter: drop-shadow(0 0 10px #ff5400);
+      animation: flamePulse 2s infinite alternate ease-in-out;
+    }
+
+    @keyframes flamePulse {
+      0% { transform: scale(0.95); filter: drop-shadow(0 0 8px #ff5400); }
+      100% { transform: scale(1.1); filter: drop-shadow(0 0 18px #ffaa00); }
+    }
+
+    .brand-text h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px;
+      letter-spacing: 1.5px;
+      line-height: 1;
+      background: linear-gradient(135deg, #fff 40%, var(--secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text span {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      font-weight: 700;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #fff;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .btn-ifood-nav {
+      background: #ea1d2c;
+      color: #fff;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(234, 29, 44, 0.35);
+    }
+
+    .btn-ifood-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(234, 29, 44, 0.6);
+      filter: brightness(1.1);
+    }
+
+    .btn-cart {
+      position: relative;
+      background: rgba(255, 84, 0, 0.15);
+      border: 1px solid var(--border);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-cart:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    .cart-badge {
+      background: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      width: 19px;
+      height: 19px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, #d84000 100%);
+      color: #fff;
+      border: none;
+      padding: 11px 24px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(255, 84, 0, 0.35);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 84, 0, 0.6);
+      filter: brightness(1.1);
+    }
+
+    /* HERO SCROLL SECTION */
+    .hero-scroll-container {
+      position: relative;
+      width: 100%;
+      height: 430vh;
+      z-index: 10;
+    }
+
+    .hero-sticky-stage {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 84, 0, 0.12) 0%, rgba(4, 4, 4, 1) 75%);
+    }
+
+    #burger-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hero-story-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 120px 60px 40px;
+    }
+
+    .hero-intro-text {
+      max-width: 650px;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .super-restaurante-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(234, 29, 44, 0.2);
+      border: 1px solid rgba(234, 29, 44, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ff7582;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(52px, 8vw, 95px);
+      line-height: 0.95;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      text-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 60%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .hero-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      animation: bounce 2s infinite;
+      pointer-events: auto;
+    }
+
+    .scroll-wheel-icon {
+      width: 22px;
+      height: 36px;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      position: relative;
+    }
+    .scroll-wheel-icon::before {
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 7px;
+      background: var(--secondary);
+      border-radius: 2px;
+      animation: wheelRoll 1.6s infinite ease-in-out;
+    }
+
+    @keyframes wheelRoll {
+      0% { transform: translate(-50%, 0); opacity: 1; }
+      100% { transform: translate(-50%, 12px); opacity: 0; }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    /* Story Cards */
+    .story-card {
+      position: absolute;
+      background: rgba(14, 11, 10, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border);
+      padding: 22px 28px;
+      border-radius: var(--radius);
+      max-width: 380px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+
+    .story-card.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .card-top-bun {
+      top: 18%;
+      right: 7%;
+    }
+
+    .card-cheese-bacon {
+      top: 42%;
+      left: 6%;
+    }
+
+    .card-angus-blend {
+      top: 62%;
+      right: 8%;
+    }
+
+    .card-final-masterpiece {
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px) scale(0.95);
+      text-align: center;
+      max-width: 520px;
+      width: 90%;
+    }
+    .card-final-masterpiece.active {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .story-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .story-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 30px;
+      line-height: 1;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .story-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .scroll-progress-line {
+      position: absolute;
+      bottom: 24px;
+      left: 60px;
+      right: 60px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    .scroll-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      box-shadow: 0 0 10px var(--primary);
+      transition: width 0.1s linear;
+    }
+
+    /* Common Sections */
+    section {
+      position: relative;
+      z-index: 20;
+      padding: 100px 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--primary);
+      background: rgba(255, 84, 0, 0.1);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(38px, 5vw, 62px);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* Differentials */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 34px 26px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 40px rgba(255, 84, 0, 0.15);
+    }
+
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: rgba(255, 84, 0, 0.12);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 25px;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Menu Section */
+    .menu-filter-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 18px var(--primary-glow);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
+    }
+
+    .menu-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .menu-item-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-hover);
+      box-shadow: 0 20px 45px rgba(255, 84, 0, 0.22);
+    }
+
+    .item-image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #110e0c;
+    }
+
+    .item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+
+    .menu-item-card:hover .item-image {
+      transform: scale(1.08);
+      filter: brightness(1.05);
+    }
+
+    .item-image-gradient {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 70%;
+      background: linear-gradient(to top, rgba(20, 16, 14, 0.98) 0%, rgba(20, 16, 14, 0.4) 60%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .item-badge-overlay {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      z-index: 2;
+    }
+
+    .item-body {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .item-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .item-badge {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-fire {
+      background: rgba(255, 84, 0, 0.2);
+      color: var(--secondary);
+      border: 1px solid var(--border);
+    }
+
+    .badge-bestseller {
+      background: rgba(230, 57, 70, 0.25);
+      color: #ff7582;
+      border: 1px solid rgba(230, 57, 70, 0.35);
+    }
+
+    .item-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .item-description {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 22px;
+      flex-grow: 1;
+    }
+
+    .item-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .item-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 29px;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+    }
+
+    .item-price small {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-right: 4px;
+    }
+
+    .btn-add {
+      background: rgba(255, 84, 0, 0.15);
+      color: #fff;
+      border: 1px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-add:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    /* iFood CTA Section */
+    .ifood-banner-section {
+      background: linear-gradient(135deg, rgba(234, 29, 44, 0.25) 0%, rgba(20, 16, 14, 0.95) 100%), #120e0d;
+      border: 1px solid rgba(234, 29, 44, 0.35);
+      border-radius: 24px;
+      padding: 55px 45px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      position: relative;
+      overflow: hidden;
+      margin: 30px auto 90px;
+    }
+
+    .ifood-banner-section::after {
+      content: '🛵';
+      position: absolute;
+      right: 25px;
+      bottom: -25px;
+      font-size: 150px;
+      opacity: 0.07;
+      pointer-events: none;
+    }
+
+    .ifood-banner-info h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 4vw, 52px);
+      line-height: 1;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .ifood-banner-info p {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 550px;
+    }
+
+    .ifood-cta-buttons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-ifood-large {
+      background: #ea1d2c;
+      color: #fff;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+      box-shadow: 0 6px 20px rgba(234, 29, 44, 0.45);
+    }
+
+    .btn-ifood-large:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(234, 29, 44, 0.7);
+      filter: brightness(1.1);
+    }
+
+    /* Reviews */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .review-stars {
+      color: var(--secondary);
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .review-text {
+      font-size: 14px;
+      color: #e2dedb;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .reviewer-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #040404;
+      font-size: 15px;
+    }
+
+    .reviewer-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .reviewer-date {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      border-top: 1px solid rgba(255, 84, 0, 0.15);
+      padding: 70px 40px 30px;
+      position: relative;
+      z-index: 20;
+    }
+
+    .footer-grid {
+      max-width: 1300px;
+      margin: 0 auto 50px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .footer-col p {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+      padding-left: 6px;
+    }
+
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding-top: 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Cart Drawer */
+    .cart-drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cart-drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: -480px;
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      background: #110e0c;
+      border-left: 1px solid rgba(255, 117, 0, 0.15);
+      z-index: 2001;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -15px 0 45px rgba(0, 0, 0, 0.9);
+      transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-drawer.open {
+      right: 0;
+    }
+
+    .cart-drawer-header {
+      padding: 24px 24px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-drawer-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38px;
+      letter-spacing: 1.5px;
+      color: #ffb703;
+      line-height: 1;
+    }
+
+    .btn-close-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #251e1a;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-close-circle:hover {
+      background: #382c26;
+      transform: scale(1.05);
+    }
+
+    .cart-content-body {
+      padding: 0 24px 28px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+
+    .cart-items-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+    }
+
+    .cart-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .cart-item-info h5 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .cart-item-info span {
+      font-size: 14px;
+      color: #a89f98;
+      font-weight: 500;
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-circle-qty {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ff7500;
+      border: none;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, background 0.15s;
+      line-height: 1;
+    }
+
+    .btn-circle-qty:hover {
+      background: #ff8c1a;
+      transform: scale(1.08);
+    }
+
+    .cart-qty-num {
+      font-size: 16px;
+      font-weight: 800;
+      color: #fff;
+      min-width: 14px;
+      text-align: center;
+    }
+
+    .cart-total-section {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .cart-total-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #ffb703;
+      letter-spacing: 0.5px;
+    }
+
+    .cart-delivery-note {
+      font-size: 13.5px;
+      color: #a89f98;
+      margin-top: 4px;
+    }
+
+    .checkout-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .checkout-input {
+      width: 100%;
+      background: #1b1613;
+      border: 1px solid #2d241f;
+      border-radius: 12px;
+      color: #fff;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .checkout-input:focus {
+      border-color: #ff7500;
+      background: #221c18;
+    }
+
+    .checkout-input::placeholder {
+      color: #6d645d;
+    }
+
+    .checkout-select {
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a89f98' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      background-size: 16px;
+      padding-right: 44px;
+    }
+
+    .checkout-select option {
+      background: #181310;
+      color: #fff;
+    }
+
+    .checkout-textarea {
+      resize: vertical;
+      min-height: 75px;
+    }
+
+    .btn-submit-whatsapp {
+      width: 100%;
+      background: #1dd75b;
+      color: #04250e;
+      border: none;
+      border-radius: 30px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 18px rgba(29, 215, 91, 0.35);
+      margin-top: 4px;
+    }
+
+    .btn-submit-whatsapp:hover {
+      filter: brightness(1.08);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(29, 215, 91, 0.5);
+    }
+
+    .btn-clear-order {
+      background: none;
+      border: none;
+      color: #ffb703;
+      text-decoration: underline;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      margin: 14px auto 4px;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-clear-order:hover {
+      opacity: 0.8;
+    }
+
+    /* Toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: rgba(14, 11, 10, 0.95);
+      border: 1px solid var(--primary);
+      box-shadow: 0 10px 30px var(--primary-glow);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 3000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .toast-msg.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Floating WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #fff;
+      border-radius: 50px;
+      padding: 12px 22px 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      z-index: 1999;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: pulseWa 2.8s infinite;
+    }
+
+    @keyframes pulseWa {
+      0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+      70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px) scale(1.06);
+      box-shadow: 0 12px 30px rgba(37, 211, 102, 0.65);
+      color: #fff;
+    }
+
+    .whatsapp-icon-svg {
+      width: 26px;
+      height: 26px;
+      fill: #fff;
+      display: block;
+    }
+
+    @media (max-width: 992px) {
+      .navbar {
+        padding: 14px 24px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-story-layer {
+        padding: 100px 24px 30px;
+      }
+      .card-top-bun, .card-angus-blend {
+        right: 4%;
+      }
+      .card-cheese-bacon {
+        left: 4%;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      section {
+        padding: 70px 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-bar {
+        font-size: 11px;
+        padding: 6px 10px;
+      }
+      .navbar {
+        top: 32px;
+      }
+      .hero-title {
+        font-size: 46px;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+      }
+      .story-card {
+        max-width: 92%;
+        padding: 16px 20px;
+      }
+      .card-top-bun {
+        top: 14%;
+        right: 4%;
+      }
+      .card-cheese-bacon {
+        top: 38%;
+        left: 4%;
+      }
+      .card-angus-blend {
+        top: 60%;
+        right: 4%;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .cart-drawer {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Embers Canvas -->
+  <canvas id="embers-canvas"></canvas>
+
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <span>🏆 <strong>Super Restaurante iFood</strong> em Almirante Tamandaré - PR!</span>
+    <span>•</span>
+    <span>Pão artesanal assado na hora & carne 100% fresca</span>
+    <span>•</span>
+    <a href="https://www.ifood.com.br/delivery/almirante-tamandare-pr/tamandare-burguer-delivery-vila-alto-pinheiros/3f9378c7-e748-4a2d-82bd-e5c1dafb5540" target="_blank">Pedir no iFood →</a>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar" id="navbar">
+    <a href="#" class="brand-logo">
+      <img src="logo.png" alt="Tamandaré Burguer" class="brand-img-logo">
+      <div class="brand-text">
+        <h1>TAMANDARÉ BURGUER</h1>
+        <span>DELIVERY • VILA ALTO PINHEIROS</span>
+      </div>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#hero" class="active">O Burger</a></li>
+      <li><a href="#diferenciais">Diferenciais</a></li>
+      <li><a href="#cardapio">Cardápio</a></li>
+      <li><a href="#ifood-section">iFood</a></li>
+      <li><a href="#avaliacoes">Avaliações</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="https://www.ifood.com.br/delivery/almirante-tamandare-pr/tamandare-burguer-delivery-vila-alto-pinheiros/3f9378c7-e748-4a2d-82bd-e5c1dafb5540" target="_blank" class="btn-ifood-nav">
+        <span>🛵</span> iFood Oficial
+      </a>
+      <button class="btn-cart" id="open-cart-btn">
+        <span>🛒</span>
+        <span>Pedido</span>
+        <span class="cart-badge" id="cart-counter">0</span>
+      </button>
+      <a href="#cardapio" class="btn-primary">Ver Cardápio</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION WITH SCROLL-DRIVEN BURGER FRAME SCRUBBING -->
+  <div class="hero-scroll-container" id="hero">
+    <div class="hero-sticky-stage">
+      
+      <!-- Canvas with the 24 burger frames -->
+      <canvas id="burger-canvas"></canvas>
+
+      <!-- Story Overlays -->
+      <div class="hero-story-layer">
+        
+        <!-- Frame Phase 0 - Intro -->
+        <div class="hero-intro-text" id="intro-card">
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+            <img src="logo.png" alt="Tamandaré Burguer Emblem" style="width: 74px; height: 74px; object-fit: contain; filter: drop-shadow(0 0 16px rgba(255, 84, 0, 0.6)); animation: floatLogo 3s infinite ease-in-out alternate;">
+            <div class="super-restaurante-badge" style="margin-bottom: 0;">⭐ Super Restaurante no iFood</div>
+          </div>
+          <h2 class="hero-title">O Melhor Artesanal de <span>Tamandaré</span>.</h2>
+          <p class="hero-subtitle">Hambúrguer artesanal preparado com paixão na Vila Alto Pinheiros. Pão assado na hora, carne suculenta e sabor incomparável.</p>
+          <div class="hero-scroll-hint">
+            <div class="scroll-wheel-icon"></div>
+            <span>Role para desconstruir cada camada</span>
+          </div>
+        </div>
+
+        <!-- Frame Phase 1: Pão Assado na Hora -->
+        <div class="story-card card-top-bun" id="card-1">
+          <div class="story-badge">🍞 Nosso Grande Segredo</div>
+          <h3 class="story-title">Pão Assado na Hora</h3>
+          <p class="story-desc">Pão francês artesanal assado na hora, quentinho e crocante por fora com miolo fofinho e selado na chapa.</p>
+        </div>
+
+        <!-- Frame Phase 2: Cheddar Cremoso & Bacon Crocante -->
+        <div class="story-card card-cheese-bacon" id="card-2">
+          <div class="story-badge">🧀 O Recheio Perfeito</div>
+          <h3 class="story-title">Cheddar & Bacon Crocante</h3>
+          <p class="story-desc">Fatias generosas de queijo cheddar derretido e tiras de bacon crocante preparadas no ponto exato.</p>
+        </div>
+
+        <!-- Frame Phase 3: Hambúrguer Artesanal com Tempero Exclusivo -->
+        <div class="story-card card-angus-blend" id="card-3">
+          <div class="story-badge">🥩 100% Carne Bovina</div>
+          <h3 class="story-title">Burger Artesanal Suculento</h3>
+          <p class="story-desc">Blend artesanal temperado com nossa receita exclusiva da casa, prensado na chapa com crosta dourada e suculência garantida.</p>
+        </div>
+
+        <!-- Frame Phase 4: Pronto para pedir -->
+        <div class="story-card card-final-masterpiece" id="card-4">
+          <div class="story-badge">🚀 Delivery Rápido em Tamandaré</div>
+          <h3 class="story-title">Bateu Aquela Fome?</h3>
+          <p class="story-desc" style="margin-bottom: 18px;">Montado com carinho e entregue quentinho na sua porta. Peça pelo iFood ou pelo WhatsApp.</p>
+          <a href="#cardapio" class="btn-primary" style="margin: 0 auto; display: inline-flex;">Escolher Meu Burger ↓</a>
+        </div>
+
+      </div>
+
+      <!-- Bottom Progress Line -->
+      <div class="scroll-progress-line">
+        <div class="scroll-progress-fill" id="progress-fill"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION: DIFERENCIAIS -->
+  <section id="diferenciais">
+    <div class="section-header">
+      <div class="section-tag">⭐ Nossa Tradição</div>
+      <h2 class="section-title">Por que o Tamandaré Burguer é o Favorito?</h2>
+      <p class="section-subtitle">Desde 2020 entregando os lanches mais elogiados de Almirante Tamandaré e região metropolitana.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🥖</div>
+        <h3>Pão Assado na Hora</h3>
+        <p>Aqui você não come pão amanhecido. Nossos pães franceses artesanais são assados diariamente para garantir máxima crocância.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🥩</div>
+        <h3>Carne 100% Artesanal</h3>
+        <p>Hambúrguer de verdade, preparado com carnes selecionadas e tempero exclusivo da casa que conquistou a cidade.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧅</div>
+        <h3>Anéis de Cebola & Fritas Crinkle</h3>
+        <p>Acompanhamentos crocantes de verdade! Nossos anéis de cebola empanados e fritas com cheddar e bacon são lendários.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Super Restaurante iFood</h3>
+        <p>Selo de excelência conferido pelo iFood por rapidez na entrega, qualidade impecável e índice de satisfação superior.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: CARDÁPIO ORIGINAL DO TAMANDARÉ BURGUER -->
+  <section id="cardapio">
+    <div class="section-header">
+      <div class="section-tag">🍔 Cardápio Oficial</div>
+      <h2 class="section-title">Os Burgers de Tamandaré</h2>
+      <p class="section-subtitle">Nomes inspirados nos bairros da nossa cidade! Todos preparados com maionese artesanal da casa.</p>
+    </div>
+
+    <div class="menu-filter-bar">
+      <button class="filter-btn active" data-filter="all">🔥 Todos os Itens</button>
+      <button class="filter-btn" data-filter="combos">🎉 Combos Campeões</button>
+      <button class="filter-btn" data-filter="burgers">🍔 Burgers Artesanais</button>
+      <button class="filter-btn" data-filter="porcoes">🍟 Porções & Fritas</button>
+      <button class="filter-btn" data-filter="bebidas">🥤 Bebidas Geladas</button>
+    </div>
+
+    <div class="menu-grid" id="menu-container">
+      <!-- Inserido dinamicamente via JS com itens reais do Tamandaré Burguer -->
+    </div>
+  </section>
+
+  <!-- SECTION: BANNER IFOOD OFICIAL -->
+  <section id="ifood-section" style="padding: 0 40px;">
+    <div class="ifood-banner-section">
+      <div class="ifood-banner-info">
+        <div class="section-tag" style="background: rgba(234, 29, 44, 0.2); color: #ff7582; border-color: rgba(234, 29, 44, 0.4);">
+          🛵 Peça no iFood com Segurança
+        </div>
+        <h3>Tamandaré Burguer Delivery no iFood</h3>
+        <p>Atendimento rápido, cupons de desconto exclusivos e rastreamento em tempo real do seu pedido até a sua casa em Almirante Tamandaré!</p>
+      </div>
+      <div class="ifood-cta-buttons">
+        <a href="https://www.ifood.com.br/delivery/almirante-tamandare-pr/tamandare-burguer-delivery-vila-alto-pinheiros/3f9378c7-e748-4a2d-82bd-e5c1dafb5540" target="_blank" class="btn-ifood-large">
+          <span>🛵</span> Abrir Página no iFood
+        </a>
+        <button class="btn-primary" id="open-cart-banner-btn" style="background: #25d366; box-shadow: 0 4px 18px rgba(37, 211, 102, 0.4);">
+          <span>💬</span> Pedir no WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: AVALIAÇÕES DOS CLIENTES -->
+  <section id="avaliacoes">
+    <div class="section-header">
+      <div class="section-tag">💬 Clientes Satisfeitos</div>
+      <h2 class="section-title">Avaliações 5 Estrelas</h2>
+      <p class="section-subtitle">Veja o que diz quem já pediu e se apaixonou pelo Tamandaré Burguer.</p>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"O Burger São Venâncio é um absurdo! A combinação dos anéis de cebola com o bacon e a maionese de alho no pão quentinho é perfeita. O melhor de Tamandaré!"</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">MS</div>
+          <div>
+            <div class="reviewer-name">Marcos Silveira</div>
+            <div class="reviewer-date">Almirante Tamandaré • iFood</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Pedimos o Combo Casal com a batata com cheddar e bacon. Chegou super rápido, quentinho e com o pão crocante de verdade. Parabéns pelo capricho!"</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">JL</div>
+          <div>
+            <div class="reviewer-name">Juliana Lima</div>
+            <div class="reviewer-date">Vila Alto Pinheiros • Avaliação Verificada</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Atendimento impecável no WhatsApp e no iFood. A maionese da casa é muito boa e o hambúrguer artesanal é bem temperado e suculento. Pedimos toda semana!"</p>
+        <div class="reviewer-info">
+          <div class="reviewer-avatar">TF</div>
+          <div>
+            <div class="reviewer-name">Thiago Fernandes</div>
+            <div class="reviewer-date">Almirante Tamandaré • Google Reviews</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: FOOTER & CONTATO -->
+  <footer id="contato">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="brand-logo" style="margin-bottom: 18px;">
+          <img src="logo.png" alt="Tamandaré Burguer" class="brand-img-logo" style="width: 50px; height: 50px;">
+          <div class="brand-text">
+            <h1>TAMANDARÉ BURGUER</h1>
+            <span>DELIVERY • ALTO PINHEIROS</span>
+          </div>
+        </a>
+        <p>Hamburgueria artesanal 100% delivery funcionando desde julho de 2020. Qualidade e carinho em cada entrega.</p>
+        <p style="color: var(--secondary); font-weight: 700;">📍 Vila Alto Pinheiros, Almirante Tamandaré - PR</p>
+        <p style="color: #25d366; font-weight: 700; margin-bottom: 6px;">📱 WhatsApp: (41) 99107-1029</p>
+        <p style="color: #fff; font-size: 13px;">📸 Instagram: <a href="https://www.instagram.com/tamandare_burguer" target="_blank" style="color: var(--primary); text-decoration: underline;">@tamandare_burguer</a></p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">O Hambúrguer</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#cardapio">Cardápio Completo</a></li>
+          <li><a href="#ifood-section">Pedir no iFood</a></li>
+          <li><a href="#avaliacoes">Avaliações</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Horário de Entrega</h4>
+        <p><strong>Terça a Domingo:</strong><br>18:30 às 23:30</p>
+        <p style="color: var(--primary);">Entregas para toda Almirante Tamandaré e bairros vizinhos.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Canais de Pedido</h4>
+        <p>Faça seu pedido diretamente pelo iFood ou pelo WhatsApp da hamburgueria:</p>
+        <a href="https://www.ifood.com.br/delivery/almirante-tamandare-pr/tamandare-burguer-delivery-vila-alto-pinheiros/3f9378c7-e748-4a2d-82bd-e5c1dafb5540" target="_blank" class="btn-ifood-large" style="width: 100%; justify-content: center; margin-bottom: 10px;">
+          <span>🛵</span> iFood Tamandaré Burguer
+        </a>
+        <a href="https://wa.me/5541991071029?text=Ol%C3%A1%2C+gostaria+de+fazer+um+pedido%21" target="_blank" class="btn-primary" style="width: 100%; justify-content: center; background: #25d366; box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35); text-decoration: none;">
+          <span>💬</span> Pedido no WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>&copy; 2026 Tamandaré Burguer Delivery Ltda. Almirante Tamandaré - PR.</div>
+      <div>Feito com pão assado na hora e paixão por hambúrguer artesanal 🔥</div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER / SEU PEDIDO MODAL -->
+  <div class="cart-drawer-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">SEU PEDIDO</div>
+      <button class="btn-close-circle" id="close-cart-btn" title="Fechar">&times;</button>
+    </div>
+
+    <div class="cart-content-body">
+      <!-- Items List -->
+      <div class="cart-items-list" id="cart-items">
+        <div class="cart-empty-message">
+          <p style="font-size: 38px; margin-bottom: 10px;">🍔</p>
+          <p style="font-weight: 700; color: #fff; margin-bottom: 4px;">Seu carrinho está vazio</p>
+          <p style="font-size: 13px;">Adicione seus lanches favoritos do Tamandaré Burguer para pedir!</p>
+        </div>
+      </div>
+
+      <!-- Total & Delivery Note -->
+      <div class="cart-total-section">
+        <div class="cart-total-row">
+          <span>Total</span>
+          <span class="cart-total-price" id="cart-total">R$ 0,00</span>
+        </div>
+        <p class="cart-delivery-note">A taxa de entrega é combinada pelo WhatsApp.</p>
+      </div>
+
+      <!-- Form Inputs -->
+      <form class="checkout-form" id="checkout-form" onsubmit="return false;">
+        <input type="text" id="order-customer-name" class="checkout-input" placeholder="Seu nome" autocomplete="name">
+        <input type="text" id="order-customer-address" class="checkout-input" placeholder="Endereço de entrega" autocomplete="street-address">
+        <select id="order-payment-method" class="checkout-input checkout-select">
+          <option value="Pix" selected>Pix</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+        <textarea id="order-customer-notes" class="checkout-input checkout-textarea" placeholder="Observações (ex.: sem cebola)" rows="2"></textarea>
+        
+        <button type="button" class="btn-submit-whatsapp" id="btn-submit-order">
+          Enviar pedido no WhatsApp
+        </button>
+
+        <button type="button" class="btn-clear-order" id="btn-clear-order">
+          Limpar pedido
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <!-- Notification Toast -->
+  <div class="toast-msg" id="toast-msg">
+    <span>✅</span>
+    <span id="toast-text">Item adicionado ao pedido!</span>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <a href="https://wa.me/5541991071029?text=Ol%C3%A1%21+Gostaria+de+fazer+um+pedido+no+Tamandar%C3%A9+Burguer" target="_blank" class="whatsapp-float" id="wa-float" title="Falar no WhatsApp: (41) 99107-1029">
+    <svg class="whatsapp-icon-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.002 0C7.164 0 0 7.163 0 16.001c0 2.825.738 5.58 2.14 8.01L.067 31.334a.998.998 0 0 0 1.22 1.22l7.566-2.023A15.93 15.93 0 0 0 16.002 32C24.838 32 32 24.837 32 16.001 32 7.163 24.838 0 16.002 0zm0 29.333c-2.482 0-4.908-.66-7.037-1.912a.998.998 0 0 0-.773-.105l-5.46 1.46 1.488-5.267a1.002 1.002 0 0 0-.113-.808A13.272 13.272 0 0 1 2.667 16c0-7.352 5.981-13.333 13.335-13.333 7.352 0 13.333 5.981 13.333 13.333 0 7.354-5.981 13.333-13.333 13.333zm7.625-10.02c-.417-.208-2.467-1.218-2.85-1.356-.382-.14-.66-.208-.938.208-.278.417-1.077 1.356-1.32 1.634-.243.278-.486.312-.903.104-.417-.208-1.76-.649-3.353-2.07-1.24-1.106-2.077-2.472-2.32-2.889-.243-.417-.026-.642.183-.849.188-.186.417-.486.625-.729.208-.243.278-.417.417-.695.14-.278.07-.521-.035-.729s-.938-2.26-1.285-3.093c-.338-.81-.682-.7-.938-.713-.243-.012-.521-.014-.799-.014-.278 0-.73.104-1.112.521-.382.417-1.46 1.425-1.46 3.475 0 2.05 1.494 4.031 1.703 4.309.208.278 2.94 4.49 7.123 6.297.995.43 1.772.687 2.378.879 1.002.318 1.913.273 2.634.165.803-.12 2.467-1.008 2.814-1.981.348-.973.348-1.807.243-1.981-.104-.174-.382-.278-.799-.486z"/>
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    (function() {
+      // 1. CARDÁPIO OFICIAL DO TAMANDARÉ BURGUER
+      const menuData = [
+        {
+          id: 1,
+          name: "Burger São Venâncio",
+          category: "burgers",
+          image: "images/burger-sao-venancio.jpg",
+          tags: ["Mais Pedido", "Pão Assado na Hora"],
+          desc: "Hambúrguer artesanal, 2x fatias de queijo cheddar fatiado, 3x fatias de bacon crocante, anéis de cebola empanados crocantes, maionese de alho da casa e molho barbecue no pão assado na hora.",
+          price: 29.90
+        },
+        {
+          id: 2,
+          name: "Burger Vila Grécia",
+          category: "burgers",
+          image: "images/burger-vila-grecia.jpg",
+          tags: ["Destaque da Casa"],
+          desc: "Hambúrguer artesanal, queijo cheddar fatiado derretido, fatias de bacon crocante, alface americana fresca, tomate caqui selecionado, cebola roxa e maionese especial de alho.",
+          price: 28.50
+        },
+        {
+          id: 3,
+          name: "Burger Alto Pinheiros (Especial)",
+          category: "burgers",
+          image: "images/burger-alto-pinheiros.jpg",
+          tags: ["O Monstro da Vila"],
+          desc: "Duplo hambúrguer artesanal, 4 fatias de cheddar, dobro de bacon crocante, cebola caramelizada artesanal e maionese de alho no pão tostado na manteiga.",
+          price: 36.90
+        },
+        {
+          id: 4,
+          name: "Burger Chico Mendes",
+          category: "burgers",
+          image: "images/burger-chico-mendes.jpg",
+          tags: ["Tradicional"],
+          desc: "Hambúrguer artesanal bem suculento, queijo derretido, maionese artesanal da casa, picles e pão artesanal crocante.",
+          price: 24.90
+        },
+        {
+          id: 5,
+          name: "Combo Casal Cheddar Bacon",
+          category: "combos",
+          image: "images/combo-casal.jpg",
+          tags: ["Mais Vendido", "Economia"],
+          desc: "2 Burgers artesanais completos com queijo cheddar e bacon + Porção generosa de batatas fritas crinkle com cheddar cremoso e bacon + Refrigerante 600ml.",
+          price: 64.90
+        },
+        {
+          id: 6,
+          name: "Combo Triplo da Tamanda",
+          category: "combos",
+          image: "images/combo-triplo.jpg",
+          tags: ["Família & Amigos"],
+          desc: "3 Burgers artesanais no pão assado na hora com cheddar e bacon + Batata rústica crocante grande com cheddar + Refrigerante 2 Litros.",
+          price: 89.90
+        },
+        {
+          id: 7,
+          name: "O Favorito da Casa",
+          category: "combos",
+          image: "images/combo-favorito.jpg",
+          tags: ["Recomendado"],
+          desc: "2 Burgers artesanais caprichados com cheddar fatiado e bacon + Porção de batata frita crocante quentinha.",
+          price: 52.00
+        },
+        {
+          id: 8,
+          name: "Batata Crinkle com Cheddar & Bacon",
+          category: "porcoes",
+          image: "images/batata-crinkle-cheddar.jpg",
+          tags: ["Super Crocante"],
+          desc: "Porção de batatas com corte ondulado crinkle, cobertas com cheddar cremoso derretido e pedacinhos crocantes de bacon frito.",
+          price: 22.00
+        },
+        {
+          id: 9,
+          name: "Anéis de Cebola Empanados (Onion Rings)",
+          category: "porcoes",
+          image: "images/onion-rings.jpg",
+          tags: ["Porção Especial"],
+          desc: "10 unidades de anéis de cebola dourados e ultra crocantes. Acompanha molho barbecue artesanal da casa.",
+          price: 19.90
+        },
+        {
+          id: 10,
+          name: "Batata Frita Tradicional Palito",
+          category: "porcoes",
+          image: "images/batata-palito.jpg",
+          tags: ["Clássica"],
+          desc: "Batata frita tradicional bem sequinha e crocante, temperada com sal fino. Acompanha maionese de alho da casa.",
+          price: 16.00
+        },
+        {
+          id: 11,
+          name: "Coca-Cola Original (Lata 350ml)",
+          category: "bebidas",
+          image: "images/coca-lata.jpg",
+          tags: ["Gelada"],
+          desc: "Lata 350ml bem geladinha para acompanhar seu burger.",
+          price: 6.50
+        },
+        {
+          id: 12,
+          name: "Refrigerante Cini Gengibirra (2L)",
+          category: "bebidas",
+          image: "images/cini-gengibirra.jpg",
+          tags: ["Tradição Paranaense"],
+          desc: "O clássico do Paraná! Cini Gengibirra garrafa 2 Litros, perfeito para compartilhar.",
+          price: 12.00
+        },
+        {
+          id: 13,
+          name: "Coca-Cola 2 Litros",
+          category: "bebidas",
+          image: "images/coca-2l.jpg",
+          tags: ["Tamanho Família"],
+          desc: "Garrafa 2 Litros bem gelada para acompanhar os combos da galera.",
+          price: 14.00
+        }
+      ];
+
+      // 2. EMBERS PARTICLE EFFECT
+      const embersCanvas = document.getElementById('embers-canvas');
+      const embersCtx = embersCanvas.getContext('2d');
+      let embers = [];
+      const EMBER_COUNT = 45;
+
+      function resizeEmbers() {
+        embersCanvas.width = window.innerWidth;
+        embersCanvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resizeEmbers);
+      resizeEmbers();
+
+      for (let i = 0; i < EMBER_COUNT; i++) {
+        embers.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * 2.5 + 1,
+          speedY: Math.random() * 0.8 + 0.3,
+          speedX: (Math.random() - 0.5) * 0.4,
+          opacity: Math.random() * 0.6 + 0.2,
+          fade: (Math.random() - 0.5) * 0.01
+        });
+      }
+
+      function updateEmbers() {
+        embersCtx.clearRect(0, 0, embersCanvas.width, embersCanvas.height);
+        for (let p of embers) {
+          p.y -= p.speedY;
+          p.x += p.speedX;
+          p.opacity += p.fade;
+          if (p.opacity > 0.8 || p.opacity < 0.15) p.fade = -p.fade;
+
+          if (p.y < -10) {
+            p.y = embersCanvas.height + 10;
+            p.x = Math.random() * embersCanvas.width;
+          }
+
+          embersCtx.beginPath();
+          embersCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          embersCtx.fillStyle = `rgba(255, ${Math.floor(100 + Math.random() * 80)}, 20, ${p.opacity})`;
+          embersCtx.shadowBlur = 10;
+          embersCtx.shadowColor = '#ff5400';
+          embersCtx.fill();
+        }
+        requestAnimationFrame(updateEmbers);
+      }
+      updateEmbers();
+
+      // 3. BURGER SCROLL ANIMATION (CANVAS + 24 FRAMES + LERP)
+      const TOTAL_FRAMES = 24;
+      const burgerCanvas = document.getElementById('burger-canvas');
+      const ctx = burgerCanvas.getContext('2d', { alpha: false });
+      const heroContainer = document.getElementById('hero');
+      const progressFill = document.getElementById('progress-fill');
+
+      const images = [];
+      let loadedFrames = 0;
+      let dpr = window.devicePixelRatio || 1;
+      let canvasW = window.innerWidth;
+      let canvasH = window.innerHeight;
+
+      let targetProgress = 0;
+      let currentProgress = 0;
+      let lastRenderedIndex = -1;
+
+      // Preload 24 frames
+      for (let i = 1; i <= TOTAL_FRAMES; i++) {
+        const img = new Image();
+        const numStr = String(i).padStart(3, '0');
+        img.src = `ezgif-frame-${numStr}.png`;
+        img.onload = () => {
+          loadedFrames++;
+          if (loadedFrames === 1) {
+            resizeBurgerCanvas();
+            renderBurgerFrame(0);
+          }
+        };
+        images.push(img);
+      }
+
+      function resizeBurgerCanvas() {
+        dpr = window.devicePixelRatio || 1;
+        canvasW = window.innerWidth;
+        canvasH = window.innerHeight;
+        burgerCanvas.width = Math.round(canvasW * dpr);
+        burgerCanvas.height = Math.round(canvasH * dpr);
+        lastRenderedIndex = -1;
+        renderBurgerFrame(currentProgress);
+      }
+      window.addEventListener('resize', resizeBurgerCanvas);
+
+      function renderBurgerFrame(progress) {
+        const frameIndex = Math.min(
+          TOTAL_FRAMES - 1,
+          Math.max(0, Math.round(progress * (TOTAL_FRAMES - 1)))
+        );
+
+        const img = images[frameIndex];
+        if (!img || !img.complete || img.naturalWidth === 0) return;
+
+        ctx.save();
+        ctx.scale(dpr, dpr);
+
+        ctx.fillStyle = '#040404';
+        ctx.fillRect(0, 0, canvasW, canvasH);
+
+        const imgW = img.naturalWidth || 1280;
+        const imgH = img.naturalHeight || 720;
+        const scale = Math.min(canvasW / imgW, canvasH / imgH);
+
+        const renderW = imgW * scale;
+        const renderH = imgH * scale;
+        const renderX = (canvasW - renderW) / 2;
+        const renderY = (canvasH - renderH) / 2;
+
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, renderX, renderY, renderW, renderH);
+
+        ctx.restore();
+        lastRenderedIndex = frameIndex;
+      }
+
+      const introCard = document.getElementById('intro-card');
+      const card1 = document.getElementById('card-1');
+      const card2 = document.getElementById('card-2');
+      const card3 = document.getElementById('card-3');
+      const card4 = document.getElementById('card-4');
+
+      function updateStoryOverlays(p) {
+        if (p < 0.18) {
+          introCard.style.opacity = (1 - p / 0.18);
+          introCard.style.transform = `translateY(${-p * 60}px)`;
+        } else {
+          introCard.style.opacity = '0';
+          introCard.style.transform = 'translateY(-30px)';
+        }
+
+        if (p >= 0.18 && p < 0.42) {
+          card1.classList.add('active');
+        } else {
+          card1.classList.remove('active');
+        }
+
+        if (p >= 0.42 && p < 0.68) {
+          card2.classList.add('active');
+        } else {
+          card2.classList.remove('active');
+        }
+
+        if (p >= 0.68 && p < 0.90) {
+          card3.classList.add('active');
+        } else {
+          card3.classList.remove('active');
+        }
+
+        if (p >= 0.90) {
+          card4.classList.add('active');
+        } else {
+          card4.classList.remove('active');
+        }
+
+        if (progressFill) {
+          progressFill.style.width = (p * 100) + '%';
+        }
+      }
+
+      function onScroll() {
+        const rect = heroContainer.getBoundingClientRect();
+        const scrollDistance = heroContainer.offsetHeight - window.innerHeight;
+        if (scrollDistance > 0) {
+          const scrolled = -rect.top;
+          targetProgress = Math.max(0, Math.min(1, scrolled / scrollDistance));
+        }
+
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 80) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      function heroLoop() {
+        const diff = targetProgress - currentProgress;
+        if (Math.abs(diff) > 0.0001) {
+          currentProgress += diff * 0.1;
+          const frameIndex = Math.min(
+            TOTAL_FRAMES - 1,
+            Math.max(0, Math.round(currentProgress * (TOTAL_FRAMES - 1)))
+          );
+          if (frameIndex !== lastRenderedIndex) {
+            renderBurgerFrame(currentProgress);
+          }
+        } else if (currentProgress !== targetProgress) {
+          currentProgress = targetProgress;
+          renderBurgerFrame(currentProgress);
+        }
+
+        updateStoryOverlays(currentProgress);
+        requestAnimationFrame(heroLoop);
+      }
+
+      resizeBurgerCanvas();
+      onScroll();
+      requestAnimationFrame(heroLoop);
+
+      // 4. MENU FILTERS & RENDERING
+      const menuContainer = document.getElementById('menu-container');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+
+      function renderMenu(filter = 'all') {
+        menuContainer.innerHTML = '';
+        const items = filter === 'all' 
+          ? menuData 
+          : menuData.filter(i => i.category === filter);
+
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'menu-item-card';
+
+          const tagsHtml = item.tags.map(t => {
+            const isBest = t.includes('Mais') || t.includes('Campeão') || t.includes('Super');
+            return `<span class="item-badge ${isBest ? 'badge-bestseller' : 'badge-fire'}">${t}</span>`;
+          }).join('');
+
+          card.innerHTML = `
+            <div class="item-image-wrapper">
+              <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
+              <div class="item-image-gradient"></div>
+              <div class="item-badge-overlay">${tagsHtml}</div>
+            </div>
+            <div class="item-body">
+              <div>
+                <h3 class="item-title">${item.name}</h3>
+                <p class="item-description">${item.desc}</p>
+              </div>
+              <div class="item-footer">
+                <div class="item-price"><small>R$</small>${item.price.toFixed(2).replace('.', ',')}</div>
+                <button class="btn-add" data-id="${item.id}">
+                  <span>+</span> Adicionar
+                </button>
+              </div>
+            </div>
+          `;
+          menuContainer.appendChild(card);
+        });
+
+        menuContainer.querySelectorAll('.btn-add').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            addToCart(id);
+          });
+        });
+      }
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderMenu(btn.getAttribute('data-filter'));
+        });
+      });
+
+      renderMenu('all');
+
+      // 5. CARRINHO DE COMPRAS & WHATSAPP
+      let cart = [];
+      const cartCounter = document.getElementById('cart-counter');
+      const cartOverlay = document.getElementById('cart-overlay');
+      const cartDrawer = document.getElementById('cart-drawer');
+      const openCartBtn = document.getElementById('open-cart-btn');
+      const closeCartBtn = document.getElementById('close-cart-btn');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTotal = document.getElementById('cart-total');
+      const btnCheckout = document.getElementById('btn-checkout');
+      const footerWhatsappBtn = document.getElementById('footer-whatsapp-btn');
+      const openCartBannerBtn = document.getElementById('open-cart-banner-btn');
+      const toastMsg = document.getElementById('toast-msg');
+      const toastText = document.getElementById('toast-text');
+
+      function showToast(text) {
+        toastText.innerText = text;
+        toastMsg.classList.add('show');
+        setTimeout(() => toastMsg.classList.remove('show'), 2500);
+      }
+
+      function toggleCart(open) {
+        if (open) {
+          cartOverlay.classList.add('open');
+          cartDrawer.classList.add('open');
+        } else {
+          cartOverlay.classList.remove('open');
+          cartDrawer.classList.remove('open');
+        }
+      }
+
+      openCartBtn.addEventListener('click', () => toggleCart(true));
+      closeCartBtn.addEventListener('click', () => toggleCart(false));
+      cartOverlay.addEventListener('click', () => toggleCart(false));
+      if (footerWhatsappBtn) footerWhatsappBtn.addEventListener('click', () => toggleCart(true));
+      if (openCartBannerBtn) openCartBannerBtn.addEventListener('click', () => toggleCart(true));
+
+      function addToCart(itemId) {
+        const item = menuData.find(i => i.id === itemId);
+        if (!item) return;
+
+        const existing = cart.find(i => i.id === itemId);
+        if (existing) {
+          existing.qty++;
+        } else {
+          cart.push({ ...item, qty: 1 });
+        }
+
+        updateCartUI();
+        showToast(`${item.name} adicionado ao pedido!`);
+      }
+
+      function updateCartUI() {
+        const totalCount = cart.reduce((acc, i) => acc + i.qty, 0);
+        cartCounter.innerText = totalCount;
+
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = `
+            <div class="cart-empty-message">
+              <p style="font-size: 38px; margin-bottom: 10px;">🍔</p>
+              <p style="font-weight: 700; color: #fff; margin-bottom: 4px;">Seu carrinho está vazio</p>
+              <p style="font-size: 13px;">Adicione seus lanches favoritos do Tamandaré Burguer para pedir!</p>
+            </div>
+          `;
+          cartSubtotal.innerText = 'R$ 0,00';
+          cartTotal.innerText = 'R$ 0,00';
+          return;
+        }
+
+        let total = 0;
+        cartItemsContainer.innerHTML = '';
+
+        cart.forEach(item => {
+          const itemTotal = item.price * item.qty;
+          total += itemTotal;
+
+          const row = document.createElement('div');
+          row.className = 'cart-item-row';
+          row.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" class="cart-item-thumb">
+            <div class="cart-item-info" style="flex-grow: 1;">
+              <h5>${item.name}</h5>
+              <span>R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+            </div>
+            <div class="cart-item-controls">
+              <button class="btn-qty btn-minus" data-id="${item.id}">-</button>
+              <span style="font-weight: 700; font-size: 14px; min-width: 18px; text-align: center;">${item.qty}</span>
+              <button class="btn-qty btn-plus" data-id="${item.id}">+</button>
+            </div>
+          `;
+          cartItemsContainer.appendChild(row);
+        });
+
+        cartItemsContainer.querySelectorAll('.btn-minus').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const item = cart.find(i => i.id === id);
+            if (item) {
+              item.qty--;
+              if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+              }
+              updateCartUI();
+            }
+          });
+        });
+
+        cartItemsContainer.querySelectorAll('.btn-plus').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const id = parseInt(btn.getAttribute('data-id'));
+            const item = cart.find(i => i.id === id);
+            if (item) {
+              item.qty++;
+              updateCartUI();
+            }
+          });
+        });
+
+        const totalFormatted = `R$ ${total.toFixed(2).replace('.', ',')}`;
+        cartSubtotal.innerText = totalFormatted;
+        cartTotal.innerText = totalFormatted;
+      }
+
+      // Enviar pedido no WhatsApp formatado
+      btnCheckout.addEventListener('click', () => {
+        if (cart.length === 0) {
+          alert('Adicione pelo menos um item ao pedido antes de finalizar!');
+          return;
+        }
+
+        let msg = `🔥 *NOVO PEDIDO - TAMANDARÉ BURGUER DELIVERY* 🔥\n`;
+        msg += `📍 *Vila Alto Pinheiros - Almirante Tamandaré*\n\n`;
+        let total = 0;
+        cart.forEach(item => {
+          const itemTotal = item.price * item.qty;
+          total += itemTotal;
+          msg += `▪ ${item.qty}x *${item.name}* - R$ ${itemTotal.toFixed(2).replace('.', ',')}\n`;
+        });
+        msg += `\n*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}\n\n`;
+        msg += `Gostaria de informar meu endereço para entrega em Almirante Tamandaré! 🛵`;
+
+        const encoded = encodeURIComponent(msg);
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=5541991071029&text=${encoded}`;
+        window.open(whatsappUrl, '_blank');
+      });
+
+    })();
+  </script>
+</body>
+</html>
